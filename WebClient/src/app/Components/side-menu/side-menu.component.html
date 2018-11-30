@@ -1,0 +1,25 @@
+<div id="sidemenu">
+  <div class="box-heading">
+    <span>Categories</span>
+  </div>
+  <div class="box-content" [ngClass]="loading? 'loading': ''">
+    <ul>
+      <li *ngFor="let category of categories" [ngClass]="category.isExpanded? 'expanded': 'collapsed'" >
+        <div (click)="rootClicked(category)" [ngClass]="(selectedCategoryID == category.id)? 'active': ''" class="tree-root" [routerLink]="['/category']" [queryParams]="{id: category.id}" >
+          <span  class="list-item-content">{{category.name}} {{(category.productCount)? '('+category.productCount+')': ''}}</span>
+        </div>
+        <div (click)="toggleExpand(category)" class="expand-collapse-button" [ngClass]="(category.isExpanded? 'collapse': 'expand')"></div>
+        <ul class='submenu' *ngIf="category.children">
+          <li *ngFor="let child of category.children">
+            <div (click)="rootClicked(category)" class="tree-root" [ngClass]="(selectedCategoryID == child.id)? 'active': ''" [routerLink]="['/category']" [queryParams]="{id: child.id}" >
+              <span class="list-item-content">{{child.name}} ({{child.productCount}})</span>
+            </div>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <div *ngIf='loading' class="dimmer">
+        <div class="loader"></div>
+      </div>
+  </div>
+</div>

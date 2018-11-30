@@ -1,0 +1,56 @@
+<div class="body-container product-info">
+  <div *ngIf='product' class="container">
+    <div class="row">
+      <div class="col-md-5" data-toggle="modal" data-target="#imageModal">
+        <img class="product-image" src="{{product.imageBig? product.imageBig: product.image}}" (load)="imageLoaded()" error="imageFailed()"/>
+      </div>
+      <div class="col-md-7">
+        <h1 class="name">
+          {{product.name}}
+        </h1>
+        <ul class="details-list">
+          <li>
+              <i class="fa fa-chevron-circle-down" aria-hidden="true"></i>
+              <span class="label">Brand: </span>
+              <span class="data" class="link" [routerLink]="['/brand']" [queryParams]="{id: product.brand.id}">{{product.brand.name}}</span>
+          </li>
+          <li>
+              <i class="fa fa-chevron-circle-down" aria-hidden="true"></i>
+              <span class="label">Product Code: </span>
+              <span class="data">{{product.productCode}}</span>
+          </li>
+          <li>
+              <i class="fa fa-chevron-circle-down" aria-hidden="true"></i>
+              <span class="label">Availability: </span>
+              <span class="data">{{product.availability}}</span>
+          </li>
+        </ul>
+        <div class="price">
+          {{product.price}}AMD
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <not-found *ngIf="!loading && (!product)" ></not-found>
+  <div *ngIf="loading" class="white-back">
+    <div class="loader"></div>
+  </div>
+</div>
+<div  *ngIf='product' class="modal" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+          <img data-dismiss="modal" class="modal-image" src="{{product.imageBig? product.imageBig: product.image}}"/>       
+      </div>
+    </div>
+  </div>
+<div *ngIf='product' class="product-navs">
+    <ul class=" nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link active">Description</a>
+      </li>
+    </ul>
+    <div class="description-box">
+        <pre style="margin-bottom:0cm;margin-bottom:.0001pt"><span style="font-size: 12pt; line-height: 115%; font-family: Arial;">Package: 1 roll<br></span><span style="font-size: 12pt; line-height: 115%; font-family: Arial;">Height: 700mm<br></span><span style="font-size: 12pt; line-height: 115%; font-family: Arial;">Length: 20m<br></span><span style="font-size:12.0pt;line-height:115%"><span style="font-family: Arial;">Made in Italy</span></span></pre>
+    </div>
+</div>

@@ -1,0 +1,81 @@
+#sidemenu .box-heading{
+    background: #3d52d1;
+    padding: 15px 20px;
+    display: inline-block;
+    line-height: 20px;
+    font-size: 16px;
+    font-family: 'Proxima Nova';
+    font-weight: 700;
+    color: white;
+    width: 100%;
+}
+
+#sidemenu .box-content{
+    background: #333;
+}
+
+#sidemenu .box-content.loading{
+    position: relative;
+    min-height: 200px;
+}
+
+#sidemenu .box-content ul>li {
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    color:#828282;
+    cursor: pointer;
+    position: relative;
+}
+#sidemenu .tree-root{
+    padding: 15px 35px;   
+}
+#sidemenu .expand-collapse-button{
+    display: inline-block;
+    position: absolute;
+    right: 33px;
+    top: 14px;
+    width: 20px;
+    text-align: center;
+}
+#sidemenu .expand-collapse-button.expand::after{
+    content: '+';
+}
+#sidemenu .expand-collapse-button.collapse::after{
+    content: '-';
+}
+#sidemenu .submenu .tree-root{
+    padding-left: 20px;
+}
+#sidemenu .tree-root.active{
+    color:white;
+}
+#sidemenu > .box-content > ul > li.expanded > .tree-root{
+    padding-bottom: 0;
+} 
+
+#sidemenu .box-content ul>li:hover{
+    color:#3d52d1;
+}
+#sidemenu ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 13px;
+    font-family: 'Open Sans', sans-serif;
+
+}
+#sidemenu .submenu{
+    padding-left: 35px;
+    padding-right: 35px;
+    padding-bottom: 15px;   
+
+}
+#sidemenu .submenu li:last-child{
+    border-bottom: none !important; 
+}
+
+#sidemenu li.collapsed .submenu{
+    display: none;
+} 
+#sidemenu .expand-collapse-button{
+    color:#828282 !important;
+}

@@ -1,0 +1,134 @@
+@font-face {
+    font-family: 'Proxima Nova';
+    src: url('../assets/fonts/proxima-nova.woff');
+}
+@font-face{
+    font-family:'Shruti';
+    src:url("../assets/fonts/shruti.ttf");
+}
+body{
+    font-family: 'Proxima Nova', Arial, Helvetica, sans-serif;
+    color: #828282;
+    background-color: whitesmoke;
+}
+h2.header{
+    font-size: 28px;
+    font-family: "Shruti",sans-serif;
+    font-weight: 400;
+    line-height: 1.42857;
+    color: black;
+}
+/*
+    Topbar
+*/
+#topbar{
+    height: 67px;
+}
+/*
+    BrandBar
+*/
+#brands .row{
+    height: 134px;
+}
+#brands .col{
+    text-align: center;
+}
+#brands{
+    background: white;
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+}
+/*
+    Body Content
+*/
+.body-content{
+    margin-top:20px;
+}
+/*
+    SideMenu
+*/
+#sidemenu .box-heading{
+    background: #3d52d1;
+    padding: 15px 20px;
+    display: inline-block;
+    line-height: 20px;
+    font-size: 16px;
+    font-family: 'Proxima Nova';
+    font-weight: 700;
+    color: white;
+    width: 100%;
+}
+
+#sidemenu .box-content{
+    background: #333;
+}
+
+#sidemenu .box-content ul>li {
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    padding: 15px 35px;
+    color:#828282;
+    cursor: pointer;
+}
+#sidemenu .box-content ul>li:hover{
+    color:#3d52d1;
+}
+#sidemenu ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 13px;
+    font-family: 'Open Sans', sans-serif;
+
+}
+/* --- Products --- */
+.products-wrapper{
+    background: white;
+    padding-bottom: 100px;
+}
+.products-wrapper h2.header{
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+.product-col{
+    border-right: 1px solid #e5e5e5;
+    overflow: hidden;
+    padding: 0 !important;
+}
+.product-col:last-child {
+    border-right: 0;
+}
+
+.product-row{
+    border-top: 1px solid #e5e5e5;
+}
+.product-row:last-child {
+    border-bottom: 1px solid #e5e5e5;
+}
+.product{
+    padding: 15px 20px 0 20px;
+}
+.product-details{
+    padding: 10px;
+}
+.product-details .name{
+    color: #333;
+    text-transform: none;
+    font-weight: 500;
+    line-height: 20px;
+    font-size: 13px;
+    white-space: nowrap;
+    font-family: sans-serif;
+    display: block;
+    line-height: 20px;
+    margin: 0;
+    padding: 5px 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.product-details .price{
+    font-size: 18px;
+    color: #3d52d1;
+    line-height: 30px;
+    padding: 0;
+    font-weight: 700;
+}

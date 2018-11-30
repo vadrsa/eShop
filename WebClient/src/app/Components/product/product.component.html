@@ -1,0 +1,11 @@
+<div class="product" [routerLink]="['/product']" [queryParams]="{id: product.id}">
+  <div class="product-image">
+      <img (load)='imageLoadedOrFailed(product.id)' (error)='imageLoadedOrFailed(product.id)' class="img-fluid" src="{{product.image}}"/>
+  </div>
+  <div class="product-details">
+      <span class="name">{{product.name}}</span>
+      <div class="price">
+          <span>{{product.price}}AMD</span>
+      </div>
+  </div>
+</div>

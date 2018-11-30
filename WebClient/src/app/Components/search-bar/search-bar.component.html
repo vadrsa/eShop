@@ -1,0 +1,21 @@
+<div class="input-group">
+  <div class="input-group-prepend">
+    <button class="btn btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{selectedCategory == null? "All Categories": selectedCategory.name}}</button>
+    <div class="dropdown-menu" >
+      <a (click)="selectCategory(null)" class="dropdown-item" href="javascript:void(0);">All Categories</a>      
+      <div *ngFor="let category of categories" class="dropdown-tree-root">
+        <a (click)="selectCategory(category)" class="dropdown-item" href="javascript:void(0);">{{category.name}}</a>
+        <div class="dropdown-sublist">
+          <a (click)="selectCategory(c)" *ngFor="let c of category.children"  class="dropdown-item" href="javascript:void(0);">{{c.name}}</a>
+        </div>
+      </div>
+      <div *ngIf='!categoriesLoaded' class="dropdown-tree-root">
+        <a class="dropdown-item disabled" href="javascript:void(0);">Loading...</a>
+      </div>
+    </div>
+  </div>
+  <input (keyup)="$event.keyCode == 13 && search()" [(ngModel)]="queryString" type="text" class="form-control" aria-label="Text input with dropdown button">
+  <div class="input-group-append">
+    <button (click)='search()' class="btn btn-outline-primary" type="button">Search</button>
+  </div>
+</div>

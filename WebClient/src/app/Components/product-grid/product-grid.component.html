@@ -1,0 +1,11 @@
+<div *ngIf="isGridStyle">
+  <div *ngFor="let row of dproducts" class="row product-row">
+    <div *ngFor="let col of row" class="col-sm product-col">
+        <product
+          *ngIf="col"
+          (loaded)='onImageLoaded(col)'
+          [product]='col'
+        ></product>
+    </div>
+  </div>
+</div>

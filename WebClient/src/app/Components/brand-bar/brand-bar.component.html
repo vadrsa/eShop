@@ -1,0 +1,12 @@
+<div id="brands" class="container-fluid">
+  <div class="container">
+    <div class="row align-items-center">
+      <div [routerLink]="['/brand']" [queryParams]="{id: brand.id}" class="col" *ngFor="let brand of barItems">
+        <img (load)='imageLoadedorFailed(brand)' (error)='imageLoadedorFailed(brand)' src="{{brand.image}}"/>
+      </div>
+    </div>
+  </div>
+  <div *ngIf='loading' class="white-back">
+    <div class="loader"></div>
+  </div>
+</div>

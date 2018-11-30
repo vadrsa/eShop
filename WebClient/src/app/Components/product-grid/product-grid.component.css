@@ -1,0 +1,24 @@
+.products-wrapper{
+    background: white;
+    padding-bottom: 100px;
+}
+.products-wrapper h2.header{
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+.product-col{
+    border-right: 1px solid #e5e5e5;
+    overflow: hidden;
+    padding: 0 !important;
+}
+.product-col:last-child {
+    border-right: 0;
+}
+
+.product-row{
+    margin:0;
+    border-top: 1px solid #e5e5e5;
+}
+.product-row:last-child {
+    border-bottom: 1px solid #e5e5e5;
+}

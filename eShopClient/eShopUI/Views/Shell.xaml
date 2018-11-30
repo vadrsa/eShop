@@ -1,0 +1,51 @@
+﻿<dx:ThemedWindow
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+    xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+    xmlns:prism="http://prismlibrary.com/"
+    xmlns:inf="clr-namespace:eShopUI.Infrastructure;assembly=eShopUI.Infrastructure"
+    xmlns:infBehaviors="clr-namespace:eShopUI.Infrastructure.Behaviors;assembly=eShopUI.Infrastructure"
+    xmlns:infConstants="clr-namespace:eShopUI.Infrastructure.Constants;assembly=eShopUI.Infrastructure"
+    xmlns:dxn="http://schemas.devexpress.com/winfx/2008/xaml/navbar"
+    x:Class="eShopUI.Views.Shell"
+    Title="Shell" 
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    WindowStartupLocation="CenterScreen" WindowState="Maximized"
+    >
+    <DockPanel LastChildFill="True">
+        <dxr:RibbonControl DockPanel.Dock="Top" RibbonStyle="Office2010" prism:RegionManager.RegionName="{x:Static inf:RegionNames.RibbonRegion}">
+            <dxr:RibbonDefaultPageCategory>
+                <dxr:RibbonPage Caption="{x:Static infConstants:UIConstants.MainCommandPageName}">
+                    <dxr:RibbonPageGroup Caption="{x:Static infConstants:UIConstants.MainCommandGroupName}">
+                    </dxr:RibbonPageGroup>
+                    <dxr:RibbonPageGroup Caption="Exit">
+                        <dxb:BarButtonItem x:Name="Exit" Command="{Binding ExitCommand}" Content="Exit" Glyph="{dx:DXImage Image=Close_16x16.png}" LargeGlyph="{dx:DXImage Image=Close_32x32.png}"/>
+                    </dxr:RibbonPageGroup>
+
+                </dxr:RibbonPage>
+
+            </dxr:RibbonDefaultPageCategory>
+        </dxr:RibbonControl>
+        <dxr:RibbonStatusBarControl DockPanel.Dock="Bottom"/>
+
+        <DockPanel>
+            <dxn:NavBarControl DockPanel.Dock="Left" Width="200" VerticalAlignment="Top" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" prism:RegionManager.RegionName="{x:Static inf:RegionNames.NavigationRegion}">
+                <dxn:NavBarControl.View>
+                    <dxn:NavigationPaneView/>
+                </dxn:NavBarControl.View>
+            </dxn:NavBarControl>
+
+            <dx:LoadingDecorator>
+                <DockPanel DockPanel.Dock="Right">
+                    <ContentControl DockPanel.Dock="Left" prism:RegionManager.RegionName="{x:Static inf:RegionNames.DockRegion}" >
+                    </ContentControl>
+                    <ContentControl DockPanel.Dock="Right" prism:RegionManager.RegionName="{x:Static inf:RegionNames.ContentRegion}" >
+                    </ContentControl>
+                </DockPanel>
+            </dx:LoadingDecorator>
+
+        </DockPanel>
+    </DockPanel>
+</dx:ThemedWindow>

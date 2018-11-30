@@ -1,0 +1,50 @@
+<div class="product-display-header" [ngClass]='{loading: !title}'>
+  <h2 class="header">{{title? title: 'Loading...'}}</h2>
+</div>
+<div class="products-wrapper" [ngClass]="{'loading': loadingInternal}">
+  <div 
+  *ngIf="products && products.length != 0">
+    <div class="product-filter">
+        <div class=" form-row align-items-center">
+        <div class="col-auto">
+          <label for="filter-limit">Show:</label>
+          <select [(ngModel)]='limit' id="filter-limit" class="form-control" (change)="onLimitChange($event.target.value)" >
+            <option  *ngFor='let limit of limits' value="{{limit}}" [selected]="limit === limits[limitIndex]">{{limit}}</option>
+          </select>
+        </div>
+        <div class="col-auto">
+          <label for="filter-orderby">Order By:</label>
+          <select name="orderby" id="filter-orderby" class="form-control" [(ngModel)]='selectedOrderType' (change)="onOrderByChanged($event.target.value)">
+            <option  *ngFor='let orderType of orderTypes' value="{{orderType.name}}">{{orderType.displayName}}</option>
+          </select>
+        </div>
+        <div class="col-auto">
+            <label >Direction:</label>
+            <div (click)="toggleOrderDirection()" class="form-control borderless">
+              <i class="arrow" [ngClass]='isAscending? "up": "down"'></i>
+            </div>
+        </div>
+      </div>
+    </div>
+    <product-grid
+      (loaded)='productsLoaded()'
+      [products]='products'
+    >
+    </product-grid>
+    <div class="product-pagination">
+        <nav>
+            <ul class="pagination">
+              <li class="page-item"><a class="page-link" href="javascript:void(0)" (click)="firstPage()">First</a></li>
+              <li *ngFor="let pageNum of getPageination()" [ngClass]='(pageNum === page)? "active": ""' class="page-item "><a class="page-link"  href="javascript:void(0)" (click)="changePage(pageNum)">{{pageNum}}</a></li>
+              <li class="page-item"><a class="page-link" href="javascript:void(0)" (click)="lastPage()">Last</a></li>
+            </ul>
+          </nav>
+      <div class="pageinfo">Showing {{showingFrom}} to {{showingTo}} of {{productCount}} ({{pageCount}} Pages)</div>
+    </div>
+  </div>
+  <not-found *ngIf="!loadingInternal && (!products || products.length === 0)" ></not-found>
+
+  <div *ngIf="loadingInternal" class="white-back">
+    <div class="loader"></div>
+  </div>
+</div> 

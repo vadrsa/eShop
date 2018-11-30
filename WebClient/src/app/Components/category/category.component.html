@@ -1,0 +1,11 @@
+<product-display 
+  [title]='(category)?category.name: ""'
+  [products]='products'
+  [page]='page'
+  [resetLimit$]='resetLimit$'
+  [loading]='loading'
+  [productCount]='productCount'
+  (filterChanged)='filterChanged($event)'
+>
+
+</product-display>

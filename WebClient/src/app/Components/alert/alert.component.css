@@ -1,0 +1,13 @@
+#alert-messages{
+    position: absolute;
+    width: 100%;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1000;
+}
+#alert-messages .alert{
+    width: 80%;
+    opacity: 0.8;
+}

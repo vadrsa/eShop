@@ -1,0 +1,9 @@
+﻿<prism:PrismApplication x:Class="eShopUI.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:eShopUI"
+             xmlns:vc ="clr-namespace:eShopUI.Infrastructure.ValueConverters;assembly=eShopUI.Infrastructure"
+             xmlns:prism="http://prismlibrary.com/">
+    <prism:PrismApplication.Resources>
+    </prism:PrismApplication.Resources>
+</prism:PrismApplication>

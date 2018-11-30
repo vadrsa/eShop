@@ -1,0 +1,18 @@
+#brands .row{
+    height: 134px;
+}
+#brands .col{
+    text-align: center;
+    transition: opacity .4s ease;
+}
+#brands .col:hover{
+    opacity: .6;
+    transition: opacity .4s ease;
+    cursor: pointer;
+}
+#brands{
+    position: relative;
+    background: white;
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+}

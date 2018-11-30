@@ -1,0 +1,11 @@
+.dropdown-sublist .dropdown-item{
+    padding-left: 50px;
+}
+.dropdown-tree-root:hover > .dropdown-item{
+    color: #16181b;
+    text-decoration: none;
+    background-color: #f8f9fa;
+}
+.dropdown-menu{
+    z-index: 2000;
+}
