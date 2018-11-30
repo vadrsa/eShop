@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace RepositoryFacade.Interfaces
+namespace Facades.Repository
 {
     public interface IRepository<T>
     {

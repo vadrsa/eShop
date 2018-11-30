@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SharedEntities.Enums;
 
-namespace eShopApi.Controllers
+namespace Endpoints.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -23,19 +23,11 @@ namespace eShopApi.Controllers
     public class ProductsController : ControllerBase
     {
         #region Private Fields
-        private ProductManager Manager { get; set; }
-        private CategoryManager CatManager { get; set; }
-        private BrandManager BrandManager { get; set; }
-        private ImageManager ImageManager { get; set; }
         #endregion
 
 
-        public ProductsController(ProductManager manager, CategoryManager cat, BrandManager brnd, ImageManager imageManager)
+        public ProductsController()
         {
-            Manager = manager;
-            CatManager = cat;
-            BrandManager = brnd;
-            ImageManager = imageManager;
         }
 
 

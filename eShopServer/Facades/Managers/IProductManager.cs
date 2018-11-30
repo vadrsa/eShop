@@ -5,9 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RepositoryFacade.Interfaces
+namespace Facades.Managers
 {
-    public interface IProductRepository : IRepository<Product>
+    public interface IProductManager : IManager<Product>
     {
+
     }
 }
