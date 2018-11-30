@@ -3,9 +3,13 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="BusinessLogic\**" />
     <Compile Remove="ResourceAccess\**" />
+    <Content Remove="BusinessLogic\**" />
     <Content Remove="ResourceAccess\**" />
+    <EmbeddedResource Remove="BusinessLogic\**" />
     <EmbeddedResource Remove="ResourceAccess\**" />
+    <None Remove="BusinessLogic\**" />
     <None Remove="ResourceAccess\**" />
   </ItemGroup>
   <ItemGroup>

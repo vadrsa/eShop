@@ -111,10 +111,7 @@ namespace eShopApi
 
         private void AddManagers(IServiceCollection services)
         {
-            services.AddSingleton<CategoryManager, CategoryManager>();
-            services.AddSingleton<BrandManager, BrandManager>();
             services.AddSingleton<ProductManager, ProductManager>();
-            services.AddSingleton<ImageManager, ImageManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

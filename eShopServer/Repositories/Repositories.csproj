@@ -53,10 +53,6 @@
       <Project>{0769e05c-d19f-4c51-8cc9-1b476b5f8821}</Project>
       <Name>BusinessEntities</Name>
     </ProjectReference>
-    <ProjectReference Include="..\RepositoryFacade\RepositoryFacade.csproj">
-      <Project>{DBB66911-3443-4D77-AF66-77F6F1745E59}</Project>
-      <Name>RepositoryFacade</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
