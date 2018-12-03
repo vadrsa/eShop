@@ -161,18 +161,6 @@ namespace eShop.EntityViewModels.Products
             }
         }
 
-        private string _ImageBig;
-        public string ImageBig
-        {
-            get { return _ImageBig; }
-            set
-            {
-                SetProperty(ref _ImageBig, value, nameof(ImageBig));
-            }
-        }
-
         public byte[] ImageBytes { get; set; }
-
-        public byte[] ImageBigBytes { get; set; }
     }
 }

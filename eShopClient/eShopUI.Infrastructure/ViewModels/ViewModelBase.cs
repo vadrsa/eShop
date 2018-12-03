@@ -1,5 +1,6 @@
 ﻿using DevExpress.Mvvm;
 using DevExpress.Xpf.Core;
+using Prism.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,15 @@ namespace eShopUI.Infrastructure.ViewModels
 {
     public class ViewModelBase : BindableBase
     {
+        private List<SubscriptionToken> _tokens = new List<SubscriptionToken>();
+        public List<SubscriptionToken> Tokens
+        {
+            get
+            {
+                return _tokens;
+            }
+        }
+
         protected void ShowMessageBox(string message, string caption, System.Windows.MessageBoxButton buttons = System.Windows.MessageBoxButton.OK)
         {
             if (!Application.Current.Dispatcher.CheckAccess())
@@ -37,6 +47,11 @@ namespace eShopUI.Infrastructure.ViewModels
                 });
             }
             else action();
+        }
+
+        public virtual void Cleanup()
+        {
+            _tokens.ForEach(t => t.Dispose());
         }
     }
 }

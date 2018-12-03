@@ -18,7 +18,9 @@ using Modules.Products.Services;
 using AutoMapper;
 using eShop.EntityViewModels;
 using System.Diagnostics;
-using Modules.Products.Views;
+using Modules.Products.ProductManager.Views;
+using Modules.Products.ProductManager;
+using eShopUI.Infrastructure.Constants;
 
 namespace Modules.Products
 {
@@ -51,9 +53,9 @@ namespace Modules.Products
             this._regionManager = this._container.Resolve<IRegionManager>();
 
             NavBarGroup group = new NavBarGroup();
-            group.Header = Name;
+            group.Header = MenuGroups.ProductManagerGroup;
             NavBarItem item1 = new NavBarItem();
-            item1.Content = "Product Manager";
+            item1.Content = Constants.UIConstants.ProductManagerWorkItemName;
             item1.Command = ToSecureCommand(OpenProductManagerWorkItem);
             group.Items.Add(item1);
             

@@ -6,7 +6,7 @@
              xmlns:prism="http://prismlibrary.com/"
             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
     xmlns:dxInf="clr-namespace:DXInfrastructure.DependencyProperties;assembly=DXInfrastructure"
-             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" x:Class="Modules.Products.Views.ProductsListView"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" x:Class="Modules.Products.ProductManager.Views.ProductsListView"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">

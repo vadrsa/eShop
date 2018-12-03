@@ -76,10 +76,9 @@ namespace eShopUI.Infrastructure.Api
             return response;
         }
 
-        public async Task<bool> Update(TDetail details, CancellationToken token = new CancellationToken())
+        public async Task<TDetail> Update(TDetail details, CancellationToken token = new CancellationToken())
         {
-            var response = await (ControllerPath).PutJsonAsync(details, token).ConfigureAwait(false);
-            return response.StatusCode == System.Net.HttpStatusCode.OK;
+            return await (ControllerPath).PutJsonAsync(details, token).ReceiveJson<TDetail>().ConfigureAwait(false);
         }
     }
 
@@ -113,7 +112,7 @@ namespace eShopUI.Infrastructure.Api
             return _detailService.GetByID(id, token);
         }
 
-        public Task<bool> Update(T details, CancellationToken token = default(CancellationToken))
+        public Task<T> Update(T details, CancellationToken token = default(CancellationToken))
         {
             return _detailService.Update(details, token);
 

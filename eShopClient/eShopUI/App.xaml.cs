@@ -26,6 +26,7 @@ using AutoMapper;
 using EntityDTO.Products;
 using eShop.EntityViewModels;
 using eShop.EntityViewModels.Products;
+using Modules.Brands;
 
 namespace eShopUI
 {
@@ -52,6 +53,9 @@ namespace eShopUI
                 cfg.CreateMap<CategoryTreeItemDTO, CategoryTreeItemViewModel>();
                 cfg.CreateMap<CategoryTreeItemViewModel, CategoryTreeItemDTO>();
                 cfg.CreateMap<BrandInfoDTO, BrandInfoViewModel>();
+                cfg.CreateMap<BrandInfoViewModel, BrandInfoDTO>();
+                cfg.CreateMap<BrandDetailDTO, BrandDetailViewModel>();
+                cfg.CreateMap<BrandDetailViewModel, BrandDetailDTO>();
                 cfg.AllowNullCollections = true;
             });
             config.AssertConfigurationIsValid();
@@ -78,6 +82,7 @@ namespace eShopUI
             base.ConfigureModuleCatalog(moduleCatalog);
             moduleCatalog.AddModule<SecurityModule>();
             moduleCatalog.AddModule<ProductsModule>();
+            moduleCatalog.AddModule<BrandsModule>();
         }
 
         protected override Window CreateShell()

@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Interfaces\IDataErrorInfoExtended.cs" />
     <Compile Include="Interfaces\IIdEntityViewModel.cs" />
+    <Compile Include="Products\BrandDetailViewModel.cs" />
     <Compile Include="Products\CategoryTreeItemViewModel.cs" />
     <Compile Include="Products\BrandInfoViewModel.cs" />
     <Compile Include="Products\CategoryViewModel.cs" />

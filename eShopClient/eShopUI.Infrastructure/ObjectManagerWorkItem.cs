@@ -62,6 +62,8 @@ namespace eShopUI.Infrastructure
             base.Terminate();
             ShellExtensionService.RemoveFromContentRegion(this._detailsView);
             ShellExtensionService.RemoveFromDockRegion(this._listView);
+            _detailsViewModel.Cleanup();
+            _listViewModel.Cleanup();
         }
 
         private ICommand CombineCommands(ICommand command1, ICommand command2)

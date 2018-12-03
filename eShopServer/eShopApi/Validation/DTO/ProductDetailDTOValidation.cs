@@ -23,12 +23,7 @@ namespace eShopApi.Validation.DTO
             RuleFor(x => x.BrandID).GreaterThan(0);
 
             RuleFor(x => x.ImageBytes)
-                .Must(bytes => bytes != null && bytes.Length <= global.Value.MaxAllowedArrayLength).MustBeImage();
-            RuleFor(x => x.ImageBigBytes)
-                .Must(bytes => {
-                    return bytes.Length <= global.Value.MaxAllowedArrayLength;
-                }).When(i => i.ImageBigBytes != null)
-                .MustBeImage().When(i => i.ImageBigBytes != null);
+                .Must(bytes => bytes.Length <= global.Value.MaxAllowedArrayLength).MustBeImage().When(i => i.ImageBytes != null);
         }
     }
 }

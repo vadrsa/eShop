@@ -1,5 +1,7 @@
 ﻿using BusinessEntities.Products;
+using EntityDTO.Products;
 using Facades.Managers;
+using Facades.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,62 +13,70 @@ namespace Managers.Products
 {
     public class ProductManager : IProductManager
     {
-        public List<Product> Find(Func<Product, bool> predicate)
+
+
+        public ProductManager(ServiceProvider provider)
+        {
+
+        }
+
+        public List<ProductDetailDTO> Find(Func<ProductDetailDTO, bool> predicate)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<Product>> FindAsync(Func<Product, bool> predicate, CancellationToken token = default(CancellationToken))
+        public Task<List<ProductDetailDTO>> FindAsync(Func<ProductDetailDTO, bool> predicate, CancellationToken token = default(CancellationToken))
         {
             throw new NotImplementedException();
         }
 
-        public Product FindByID(int ID)
+        public ProductDetailDTO FindByID(int ID)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Product> FindByIDAsync(int ID, CancellationToken token = default(CancellationToken))
+        public Task<ProductDetailDTO> FindByIDAsync(int ID, CancellationToken token = default(CancellationToken))
         {
             throw new NotImplementedException();
         }
 
-        public List<Product> GetAll()
+        public List<ProductInfoDTO> GetAll()
+        {
+            throw new NotImplementedException();
+
+        }
+
+        public Task<List<ProductInfoDTO>> GetAllAsync(CancellationToken token = default(CancellationToken))
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<Product>> GetAllAsync(CancellationToken token = default(CancellationToken))
+        public ProductDetailDTO Insert(ProductDetailDTO obj)
         {
             throw new NotImplementedException();
         }
 
-        public Product Insert(Product obj)
+        public Task<ProductDetailDTO> InsertAsync(ProductDetailDTO obj, CancellationToken token = default(CancellationToken))
         {
             throw new NotImplementedException();
         }
 
-        public Task<Product> InsertAsync(Product obj, CancellationToken token = default(CancellationToken))
+        public void Remove(ProductDetailDTO obj)
         {
             throw new NotImplementedException();
         }
 
-        public void Remove(Product obj)
+        public void RemoveAsync(ProductDetailDTO obj, CancellationToken token = default(CancellationToken))
         {
             throw new NotImplementedException();
         }
 
-        public void RemoveAsync(Product obj, CancellationToken token = default(CancellationToken))
+        public void Update(ProductDetailDTO obj)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(Product obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void UpdateAsync(Product obj, CancellationToken token = default(CancellationToken))
+        public void UpdateAsync(ProductDetailDTO obj, CancellationToken token = default(CancellationToken))
         {
             throw new NotImplementedException();
         }

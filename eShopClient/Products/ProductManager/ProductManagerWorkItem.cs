@@ -8,13 +8,13 @@ using eShopUI.Infrastructure.Interfaces;
 using Prism.Ioc;
 using DevExpress.Xpf.Ribbon;
 using DevExpress.Xpf.Bars;
-using Modules.Products.Views;
 using eShop.EntityViewModels;
 using Modules.Products.Constants;
 using EntityDTO.Products;
 using eShop.EntityViewModels.Products;
+using Modules.Products.ProductManager.Views;
 
-namespace Modules.Products
+namespace Modules.Products.ProductManager
 {
     class ProductManagerWorkItem : ObjectManagerWorkItem<ProductsListView, ProductsDetailView, ProductInfoDTO, ProductDetailDTO, ProductInfoViewModel, ProductDetailViewModel>
     {

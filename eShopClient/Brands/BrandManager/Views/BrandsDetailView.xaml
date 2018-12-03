@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="Modules.Brands.BrandManager.Views.BrandsDetailView"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:prism="http://prismlibrary.com/"
+            xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+            xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:vc ="clr-namespace:eShopUI.Infrastructure.ValueConverters;assembly=eShopUI.Infrastructure"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"  
+             xmlns:enums="clr-namespace:SharedEntities.Enums;assembly=SharedEntities"  
+             xmlns:inf="clr-namespace:eShopUI.Infrastructure;assembly=eShopUI.Infrastructure"  
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <vc:ObjectVisibilityConverter x:Key="ObjectVisibilityConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <dxlc:DataLayoutControl Visibility="{Binding Object, Converter={StaticResource ObjectVisibilityConverter}}" inf:ReadOnlyPanel.IsReadOnly="{Binding IsReadOnly, UpdateSourceTrigger=PropertyChanged}"
+                                CurrentItem="{Binding Object}" dxe:ValidationService.IsValidationContainer="True" AutoGenerateItems="False" Width="auto" >
+
+            <dxlc:DataLayoutItem Label="Image">
+                <dxe:ImageEdit MaxHeight="200" EditValue="{Binding DataContext.ObjectImage, ValidatesOnDataErrors=True, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType=Grid}}" />
+            </dxlc:DataLayoutItem>
+            <dxlc:DataLayoutItem Label="Name">
+                <dxe:TextEdit Text="{Binding Name, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
+            </dxlc:DataLayoutItem>
+
+        </dxlc:DataLayoutControl>
+        <dx:WaitIndicator DeferedVisibility="{Binding IsObjectLoading}">
+            <dx:WaitIndicator.ContentTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="Please Wait" FontSize="20"/>
+                        <TextBlock Text="{Binding}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </dx:WaitIndicator.ContentTemplate>
+        </dx:WaitIndicator>
+    </Grid>
+</UserControl>

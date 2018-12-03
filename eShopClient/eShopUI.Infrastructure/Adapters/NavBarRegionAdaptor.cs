@@ -28,9 +28,33 @@ namespace eShopUI.Infrastructure
                 {
                     foreach (object element in e.NewItems)
                     {
-                        if(element is NavBarGroup)
-                            regionTarget.Groups.Add((NavBarGroup)element);
-                        
+                        NavBarGroup group = (NavBarGroup)element;
+
+                        if (element is NavBarGroup)
+                        {
+                            NavBarGroup found = regionTarget.Groups.Where(g => g.Header == group.Header).FirstOrDefault();
+                            if (found != null)
+                            {
+                                //int index = regionTarget.Groups.IndexOf(found);
+                                //regionTarget.Groups.RemoveAt(index);
+                                List<NavBarItem> groupItems = new List<NavBarItem>();
+                                foreach (var el in group.Items)
+                                {
+                                    groupItems.Add(el as NavBarItem);
+                                }
+                                group.Items.Clear();
+                                foreach (var el in groupItems)
+                                {
+                                    if(el != null)
+                                    found.Items.Add(el);
+                                }
+
+                            }
+                            else
+                                regionTarget.Groups.Add(group);
+
+                        }
+
                     }
                 }
                 

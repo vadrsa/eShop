@@ -32,11 +32,7 @@ namespace EntityDTO.Products
         public string Description { get; set; }
         
         public string Image { get; set; }
-        
-        public string ImageBig { get; set; }
 
         public byte[] ImageBytes { get; set; }
-
-        public byte[] ImageBigBytes { get; set; }
     }
 }

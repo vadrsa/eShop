@@ -58,7 +58,7 @@ namespace eShopUI.Infrastructure.ViewModels
 
         #region Bindable Properties
 
-        private ObservableCollection<TInfoViewModel> _listItems;
+        private ObservableCollection<TInfoViewModel> _listItems = new ObservableCollection<TInfoViewModel>();
 
         public ObservableCollection<TInfoViewModel> ListItems
         {
@@ -122,7 +122,7 @@ namespace eShopUI.Infrastructure.ViewModels
 
         protected override bool CanDelete()
         {
-            return CurrentItem != null;
+            return CurrentItem != null && !IsListLoading;
         }
 
         protected override void Delete()
@@ -130,14 +130,17 @@ namespace eShopUI.Infrastructure.ViewModels
             IsListLoading = true;
             IObservable<bool> obs = Observable.FromAsync(() => Service.Delete(Mapper.Map<T>(CurrentItem)));
             obs.Subscribe((res) => {
-                int index = ListItems.IndexOf(CurrentItem);
-                ExecuteUIThread(() =>
+                if (res)
                 {
-                    ListItems.RemoveAt(index);
-                });
-                if (ListItems.Count > 0)
-                {
-                    CurrentItem = ListItems[Math.Max(0, index - 1)];
+                    int index = ListItems.IndexOf(CurrentItem);
+                    ExecuteUIThread(() =>
+                    {
+                        ListItems.RemoveAt(index);
+                    });
+                    if (ListItems.Count > 0)
+                    {
+                        CurrentItem = ListItems[Math.Max(0, index - 1)];
+                    }
                 }
                 IsListLoading = false;
             });
@@ -145,13 +148,13 @@ namespace eShopUI.Infrastructure.ViewModels
 
         protected override bool CanEdit()
         {
-            return ListItems != null;
+            return ListItems != null && !IsListLoading;
         }
 
 
         protected override bool CanAdd()
         {
-            return ListItems != null;
+            return ListItems != null && !IsListLoading;
         }
         
         protected virtual void HandleRowChanged(TInfoViewModel obj)
@@ -190,7 +193,10 @@ namespace eShopUI.Infrastructure.ViewModels
             try
             {
                 TInfoViewModel info = Mapper.Map<TInfoViewModel>(obj);
-                ExecuteUIThread(() => ListItems.Add(info));
+                ExecuteUIThread(() => {
+                    if (ListItems == null) ListItems = new ObservableCollection<TInfoViewModel>();
+                    ListItems.Add(info);
+                });
                 //CurrentItem = info;
             }
             catch(Exception e)
@@ -239,8 +245,8 @@ namespace eShopUI.Infrastructure.ViewModels
             _eventAggregator.GetEvent<ObjectDetailViewEditingModeChanged>().Subscribe(HandleEditingModeChanged);
             _service = container.Resolve<IRestInfoConsumingService<T>>();
             _mapper = container.Resolve<IMapper>();
-            EventAggregator.GetEvent<ObjectDetailsUpdatedEvent>().Subscribe(ObjectDetailsUpdated);
-            EventAggregator.GetEvent<ObjectDetailsItemAddedEvent>().Subscribe(ObjectDetailsItemAdded);
+            Tokens.Add(EventAggregator.GetEvent<ObjectDetailsUpdatedEvent>().Subscribe(ObjectDetailsUpdated));
+            Tokens.Add(EventAggregator.GetEvent<ObjectDetailsItemAddedEvent>().Subscribe(ObjectDetailsItemAdded));
             StartLoadList();
             _whenCurrentItemChanges = new Subject<TInfoViewModel>();
             _whenCurrentItemChanges.Throttle(TimeSpan.FromSeconds(0.2)).Subscribe((obj) => HandleRowChanged(obj));

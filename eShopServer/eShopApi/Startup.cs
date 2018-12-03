@@ -20,18 +20,23 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
-using eShopApi.ExceptionHandling;
-using eShopApi.BusinessLogic.Products;
+using Infrastructure.ExceptionHandling;
 using eShopApi.Mapping;
 using eShopApi.Options;
 using FluentValidation;
 using eShopApi.Validation;
 using FluentValidation.AspNetCore;
 using eShopApi.MVC.Filters;
-using eShopApi.BusinessLogic.Global;
 using EntityDTO.Products;
 using eShopApi.Validation.DTO;
 using EntityDTO;
+using Managers.Implementation;
+using Facades.Managers;
+using Facades.Repository;
+using Repositories.Implementation;
+using Endpoints;
+using Repositories;
+using System.Transactions;
 
 namespace eShopApi
 {
@@ -101,17 +106,26 @@ namespace eShopApi
             {
                 options.SerializerSettings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
                 options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
-            }).AddFluentValidation();
+            }).AddFluentValidation().AddApplicationPart(typeof(ClassOfEndpointAssembly).Assembly).AddControllersAsServices();
             ValidatorConfigurator.Configure(services);
             services.AddOptions();
             services.Configure<GlobalOptions>(Configuration.GetSection("global"));
             services.AddResponseCaching();
             services.AddSingleton<IConfiguration>(Configuration);
+            services.AddSingleton<ServiceProvider>(services.BuildServiceProvider());
         }
 
         private void AddManagers(IServiceCollection services)
         {
-            services.AddSingleton<ProductManager, ProductManager>();
+            services.AddTransient<IProductRepository, ProductRepository>();
+            services.AddTransient<IProductManager, ProductManager>();
+            services.AddTransient<IImageRepository, ImageRepository>();
+            services.AddTransient<IAssetRepository, AssetRepository>();
+            services.AddTransient<IImageManager, ImageManager>();
+            services.AddTransient<ICategoryManager, CategoryManager>();
+            services.AddTransient<IBrandManager, BrandManager>();
+            services.AddTransient<ICategoryRepository, CategoryRepository>();
+            services.AddTransient<IBrandRepository, BrandRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -137,6 +151,8 @@ namespace eShopApi
 
             app.UseAuthentication();
             app.UseMvc();
+            
         }
+        
     }
 }

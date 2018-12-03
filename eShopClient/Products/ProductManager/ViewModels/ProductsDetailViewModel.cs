@@ -23,7 +23,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Modules.Products.ViewModels
+namespace Modules.Products.ProductManager.ViewModels
 {
     [POCOViewModel(ImplementIDataErrorInfo = true)]
     public class ProductsDetailViewModel : ObjectDetailViewModel<ProductDetailDTO, ProductDetailViewModel>, IDataErrorInfoExtended
@@ -57,13 +57,6 @@ namespace Modules.Products.ViewModels
             LoadCategories();
             LoadBrands();
         }
-        
-        public ProductsDetailViewModel() : base(null)
-        {
-            IsObjectLoading = false;
-            Object = new ProductDetailViewModel() { Name = "test" };
-            
-        }
 
         #region Bindable Properties
 
@@ -87,13 +80,15 @@ namespace Modules.Products.ViewModels
             }
         }
 
+        private bool hasObjectImageChanged;
         private byte[] _ObjectImage;
         [RequiredCollection]
         public byte[] ObjectImage
         {
             get { return _ObjectImage; }
             set
-            {
+            {   if (value != _ObjectImage)
+                    hasObjectImageChanged = true;
                 SetProperty(ref _ObjectImage, value, nameof(ObjectImage));
             }
         }
@@ -136,7 +131,7 @@ namespace Modules.Products.ViewModels
             IObservable<byte[]> imageObs = Observable.FromAsync(()=> ApiImageHelper.GetImageBytesAsync(obj.Image, token));
             imageObs.Subscribe((img)=> {
                 ObjectImage = img;
-
+                hasObjectImageChanged = false;
             }, (e) => {
                 ShowMessageBox("Error occured while fetching data.", "Error", System.Windows.MessageBoxButton.OK);
             }, token);
@@ -164,7 +159,7 @@ namespace Modules.Products.ViewModels
 
         protected override void Save()
         {
-            if(IsValid())
+            if(IsValid() && hasObjectImageChanged)
                 Object.ImageBytes = ObjectImage;
             base.Save();
         }

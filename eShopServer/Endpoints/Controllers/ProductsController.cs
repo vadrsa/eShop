@@ -1,87 +1,83 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoMapper;
 using BusinessEntities.Products;
 using BusinessEntities.Serialization;
+using Endpoints.DEV;
 using EntityDTO.Products;
-using eShopApi.BusinessLogic.Global;
-using eShopApi.BusinessLogic.Products;
-using eShopApi.Helpers;
+using Facades.Managers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SharedEntities.Enums;
+using System;
 
 namespace Endpoints.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     [LagResponse]
-    public class ProductsController : ControllerBase
+    public class ProductsController : ApiControllerBase
     {
-        #region Private Fields
-        #endregion
+        public ProductsController(IServiceProvider serviceProvider) : base(serviceProvider)
 
-
-        public ProductsController()
-        {
-        }
-
+        { }
 
         // GET: api/Products
         [HttpGet]
-        public async Task<IEnumerable<ProductInfoDTO>> Get()
+        public async Task<IEnumerable<ProductInfoDTO>> GetAll()
         {
-            return Mapper.Map<List<ProductInfoDTO>>(await Manager.SelectAllAsync());
+            return await ServiceProvider.GetService<IProductManager>().GetAllAsync();
         }
 
         // GET: api/Products/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}", Name = "GetProductByID")]
         public async Task<ProductDetailDTO> GetByID(int id)
         {
-            return Mapper.Map<ProductDetailDTO>(await Manager.SelectByKeyAsync(id));
+            return await ServiceProvider.GetService<IProductManager>().FindByIDAsync(id);
         }
 
         [HttpGet("OrderCriterias", Name = "GetOrderByCriterias")]
         public List<EnumItemSerialized> GetOrderByCriterias()
         {
-            return EnumSerializationHelper.Serialize(typeof(ProductOrderBy));
+            throw new NotImplementedException();
         }
-        
+
         [HttpGet("Search", Name = "Search")]
         public async Task<List<Product>> Search(string query, int categoryID, int limit = 30, int start = 0, ProductOrderBy orderBy = ProductOrderBy.Name, bool ascending = true)
         {
-            return (await Manager.SelectAllAsync()).Take(categoryID).ToList();
+            throw new NotImplementedException();
+
         }
 
         [HttpGet("SearchCount", Name = "SearchCount")]
         public int SearchCount(string query, int categoryID)
         {
-            return categoryID;
+            throw new NotImplementedException();
+
         }
 
         [HttpPost]
         public async Task<ProductDetailDTO> Add(ProductDetailDTO item)
         {
-            Product toInsert = Mapper.Map<ProductDetailDTO, Product>(item);
-            int id = (await Manager.InsertWithImageAsync(toInsert, item.ImageBytes)).ID;
-            return await GetByID(id);
+            return await ServiceProvider.GetService<IProductManager>().InsertAsync(item);
+
         }
 
         [HttpPut]
-        public void Update(ProductDetailDTO item)
+        public async Task<ProductDetailDTO> Update(ProductDetailDTO item)
         {
-            
-            Manager.UpdateAsync(Mapper.Map<ProductDetailDTO, Product>(item));
+            return await ServiceProvider.GetService<IProductManager>().UpdateAsync(item);
+
         }
 
         [HttpDelete]
         public async Task<bool> Delete(ProductInfoDTO obj)
         {
-            return await Manager.Remove(obj.ID);
+            await ServiceProvider.GetService<IProductManager>().RemoveAsync(obj);
+            return true;
         }
 
 

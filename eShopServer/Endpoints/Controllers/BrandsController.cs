@@ -6,61 +6,60 @@ using System.Threading.Tasks;
 using AutoMapper;
 using BusinessEntities.Bars;
 using BusinessEntities.Products;
+using Endpoints.Controllers;
+using Endpoints.DEV;
 using EntityDTO.Products;
-using eShopApi.BusinessLogic.Products;
-using eShopApi.ResourceAccess.Bars;
+using Facades.Managers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SharedEntities.Enums;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace eShopApi.Controllers
 {
     [Route("api/[controller]")]
     [LagResponse]
     [ApiController]
-    public class BrandsController : ControllerBase
+    public class BrandsController : ApiControllerBase
     {
-
-        private BrandManager Manager { get; set; }
-
-        public BrandsController(BrandManager manager)
+        public BrandsController(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            Manager = manager;
         }
-
+        
         // GET: api/Brands
         [HttpGet]
         public async Task<IEnumerable<BrandInfoDTO>> Get()
         {
-            return Mapper.Map<IEnumerable<BrandInfoDTO>>(await Manager.SelectAllAsync());
+            return await ServiceProvider.GetService<IBrandManager>().GetAllAsync();
+        }
+        
+        [HttpGet("{id}", Name ="GetBrandByID")]
+        public async Task<BrandDetailDTO> GetByID(int id)
+        {
+            return await ServiceProvider.GetService<IBrandManager>().FindByIDAsync(id);
         }
 
-        //// GET: api/Brands/5
-        //[HttpGet("{id}", Name = "GetBrand")]
-        //public Brand Get(int id)
-        //{
-        //    return Manager.SelectByKey(id);
-        //}
 
-        //[HttpGet]
-        //[Route("baritems")]
-        //[ResponseCache(Duration = 50)]
-        //public IEnumerable<Brand> GetBrandBarItems()
-        //{
-        //    return Manager.GetBrandBar();
-        //}
+        [HttpPost]
+        public async Task<BrandDetailDTO> Add(BrandDetailDTO item)
+        {
+            return await ServiceProvider.GetService<IBrandManager>().InsertAsync(item);
 
+        }
 
-        //[HttpGet("{id}/products", Name = "GetBrandProducts")]
-        //public IEnumerable<Product> GetBrandProducts(int id, int limit = 30, int start = 0, ProductOrderBy orderBy = ProductOrderBy.Name, bool ascending = true)
-        //{
-        //    return Manager.GetProducts(id, limit, start, orderBy, ascending);
-        //}
+        [HttpPut]
+        public async Task<BrandDetailDTO> Update(BrandDetailDTO item)
+        {
+            return await ServiceProvider.GetService<IBrandManager>().UpdateAsync(item);
 
-        //[HttpGet("{id}/productsCount", Name = "GetBrandProductsCount")]
-        //public int GetBrandProductsCount(int id)
-        //{
-        //    return Manager.GetProductsCount(id);
-        //}
+        }
+
+        [HttpDelete]
+        public async Task<bool> Delete(BrandInfoDTO obj)
+        {
+            await ServiceProvider.GetService<IBrandManager>().RemoveAsync(obj);
+            return true;
+        }
+
     }
 }

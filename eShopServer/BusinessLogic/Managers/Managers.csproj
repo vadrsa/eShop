@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="8.0.0" />
+    <PackageReference Include="PostSharp" Version="6.0.30" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\BusinessEntities\BusinessEntities.csproj" />
+    <ProjectReference Include="..\..\..\Shared\EntityDTO\EntityDTO.csproj" />
+    <ProjectReference Include="..\..\Facades\Facades.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Transactions\Transactions.csproj" />
+  </ItemGroup>
+
+</Project>

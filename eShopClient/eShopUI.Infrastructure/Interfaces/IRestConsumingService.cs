@@ -18,7 +18,7 @@ namespace eShopUI.Infrastructure.Interfaces
     {
         Task<TDetail> GetByID(int id, CancellationToken token = new CancellationToken());
         Task<TDetail> Add(TDetail details, CancellationToken token = new CancellationToken());
-        Task<bool> Update(TDetail details, CancellationToken token = new CancellationToken());
+        Task<TDetail> Update(TDetail details, CancellationToken token = new CancellationToken());
 
     }
 }

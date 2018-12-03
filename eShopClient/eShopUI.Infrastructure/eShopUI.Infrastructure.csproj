@@ -112,6 +112,7 @@
     <Compile Include="Behaviors\ReturnCommandBehavior.cs" />
     <Compile Include="Behaviors\WindowDialogActivationBehavior.Desktop.cs" />
     <Compile Include="Behaviors\WindowWrapper.Desktop.cs" />
+    <Compile Include="Constants\MenuGroups.cs" />
     <Compile Include="Constants\UIConstants.cs" />
     <Compile Include="ContentWorkItem.cs" />
     <Compile Include="EditableObject\EditableAdapter.cs" />

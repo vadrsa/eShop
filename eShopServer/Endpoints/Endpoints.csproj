@@ -5,19 +5,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Controllers\BrandsController.cs" />
-    <Compile Remove="Controllers\CategoriesController.cs" />
     <Compile Remove="Controllers\UIController.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Shared\EntityDTO\EntityDTO.csproj" />
+    <PackageReference Include="AutoMapper" Version="8.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.1.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="Microsoft.AspNetCore.Mvc.Core">
-      <HintPath>..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.aspnetcore.mvc.core\2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.Core.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\..\Shared\BusinessEntities\BusinessEntities.csproj" />
+    <ProjectReference Include="..\..\Shared\EntityDTO\EntityDTO.csproj" />
+    <ProjectReference Include="..\Facades\Facades.csproj" />
   </ItemGroup>
 
 </Project>

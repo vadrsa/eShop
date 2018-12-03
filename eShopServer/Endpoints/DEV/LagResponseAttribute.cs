@@ -13,7 +13,7 @@ namespace Endpoints.DEV
 
         public override void OnActionExecuted(ActionExecutedContext actionExecutedContext)
         {
-            Thread.Sleep(TimeSpan.FromSeconds(Rand.Next(1,2)));
+            Thread.Sleep(TimeSpan.FromSeconds(Rand.Next(2,3)));
             base.OnActionExecuted(actionExecutedContext);
         }
     }

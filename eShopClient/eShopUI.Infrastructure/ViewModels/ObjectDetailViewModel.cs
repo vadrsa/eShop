@@ -77,7 +77,7 @@ namespace eShopUI.Infrastructure.ViewModels
         {
             _container = container;
             _eventAggregator = container.Resolve<IEventAggregator>();
-            _eventAggregator.GetEvent<ObjectListViewRowChanged>().Subscribe(HandleListViewRowChanged);
+            Tokens.Add(_eventAggregator.GetEvent<ObjectListViewRowChanged>().Subscribe(HandleListViewRowChanged));
             _service = container.Resolve<IRestDetailConsumingService<T>>();
             _mapper = container.Resolve<IMapper>();
         }
@@ -207,7 +207,7 @@ namespace eShopUI.Infrastructure.ViewModels
 
         protected override bool CanAdd()
         {
-            return EditMode == EditMode.ReadOnly;
+            return EditMode == EditMode.ReadOnly && Object != null;
         }
 
         protected override void Save()
@@ -232,10 +232,11 @@ namespace eShopUI.Infrastructure.ViewModels
             }
             else
             {
-                IObservable<bool> updateObs = Observable.FromAsync(() => Service.Update(Mapper.Map<TDetailViewModel, T>(Object)));
+                IObservable<T> updateObs = Observable.FromAsync(() => Service.Update(Mapper.Map<TDetailViewModel, T>(Object)));
                 updateObs.Subscribe((res) => {
                     editableObject.EndEdit();
                     editableObject = null;
+                    Object = Mapper.Map<TDetailViewModel>(res);
                     OnSave();
                     EditMode = EditMode.ReadOnly;
                     IsObjectLoading = false;
@@ -255,7 +256,7 @@ namespace eShopUI.Infrastructure.ViewModels
 
         protected override bool CanSave()
         {
-            return Object != null && EditMode == EditMode.Editable;
+            return Object != null && EditMode == EditMode.Editable && !IsObjectLoading;
         }
 
         protected override void Edit()
@@ -297,12 +298,12 @@ namespace eShopUI.Infrastructure.ViewModels
 
         protected override bool CanCancelEditing()
         {
-            return EditMode == EditMode.Editable;
+            return EditMode == EditMode.Editable && !IsObjectLoading;
         }
 
         protected override bool CanDelete()
         {
-            return EditMode == EditMode.ReadOnly;
+            return EditMode == EditMode.ReadOnly && !IsObjectLoading;
         }
 
 

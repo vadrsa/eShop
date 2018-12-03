@@ -49,12 +49,6 @@ namespace BusinessEntities.Products
 
         [Association(ThisKey = nameof(ImageID), OtherKey = "ID")]
         public Image Image { get; set; }
-
-        [Column]
-        public int ImageBigID { get; set; }
-        
-        [Association(ThisKey = nameof(ImageBigID), OtherKey = "ID")]
-        public Image ImageBig { get; set; }
     }
     
     

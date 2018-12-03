@@ -65,6 +65,7 @@ namespace eShopUI.Infrastructure.Services
 
         public void AddNavigationGroupExtension(NavBarGroup group)
         {
+
             this._regionManager.AddToRegion(RegionNames.NavigationRegion, group);
         }
 

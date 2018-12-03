@@ -10,5 +10,6 @@ namespace eShopUI.Infrastructure.Constants
     {
         public static string MainCommandPageName = "Home";
         public static string MainCommandGroupName = "Home";
+
     }
 }

@@ -6,14 +6,15 @@ namespace EntityDTO.Products
 {
     public class BrandInfoDTO
     {
-        public string ID { get; set; }
+        public int ID { get; set; }
         public string Name { get; set; }
     }
 
     public class BrandDetailDTO
     {
-        public string ID { get; set; }
+        public int ID { get; set; }
         public string Name { get; set; }
         public string Image { get; set; }
+        public byte[] ImageBytes { get; set; }
     }
 }

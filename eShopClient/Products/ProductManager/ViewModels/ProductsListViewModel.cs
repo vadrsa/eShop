@@ -15,7 +15,7 @@ using eShopUI.Infrastructure.Api;
 using AutoMapper;
 using eShop.EntityViewModels.Products;
 
-namespace Modules.Products.ViewModels
+namespace Modules.Products.ProductManager.ViewModels
 {
     class ProductsListViewModel : ObjectListViewModel<ProductInfoDTO, ProductInfoViewModel>
     {
