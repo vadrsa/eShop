@@ -26,7 +26,7 @@ using AutoMapper;
 using EntityDTO.Products;
 using eShop.EntityViewModels;
 using eShop.EntityViewModels.Products;
-using Modules.Brands;
+using System.Windows.Data;
 
 namespace eShopUI
 {
@@ -47,6 +47,9 @@ namespace eShopUI
         {
 
             MapperConfiguration config = new MapperConfiguration(cfg => {
+                cfg.AddGlobalIgnore("Track");
+                cfg.AddGlobalIgnore("State");
+                cfg.AddGlobalIgnore("IsChanged");
                 cfg.CreateMap<ProductInfoDTO, ProductInfoViewModel>();
                 cfg.CreateMap<ProductDetailDTO, ProductDetailViewModel>();
                 cfg.CreateMap<ProductDetailViewModel, ProductInfoViewModel>();
@@ -82,7 +85,7 @@ namespace eShopUI
             base.ConfigureModuleCatalog(moduleCatalog);
             moduleCatalog.AddModule<SecurityModule>();
             moduleCatalog.AddModule<ProductsModule>();
-            moduleCatalog.AddModule<BrandsModule>();
+
         }
 
         protected override Window CreateShell()

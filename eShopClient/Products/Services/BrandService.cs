@@ -14,4 +14,11 @@ namespace Modules.Products.Services
         {
         }
     }
+
+    class BrandDetailService : RestDetailConsumingService<BrandDetailDTO>
+    {
+        public BrandDetailService() : base("brands")
+        {
+        }
+    }
 }

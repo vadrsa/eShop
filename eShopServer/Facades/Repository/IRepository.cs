@@ -14,6 +14,8 @@ namespace Facades.Repository
         Task<List<T>> GetAllAsync(CancellationToken token = new CancellationToken());
         T Insert(T obj);
         Task<T> InsertAsync(T obj, CancellationToken token = new CancellationToken());
+        long InsertRange(List<T> obj);
+        Task<long> InsertRangeAsync(List<T> obj, CancellationToken token = new CancellationToken());
         T FindByID(int ID);
         Task<T> FindByIDAsync(int ID, CancellationToken token = new CancellationToken());
         List<T> Find(Func<T, bool> predicate);

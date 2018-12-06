@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EntityViewModelBase.cs" />
     <Compile Include="Interfaces\IDataErrorInfoExtended.cs" />
     <Compile Include="Interfaces\IIdEntityViewModel.cs" />
     <Compile Include="Products\BrandDetailViewModel.cs" />
@@ -61,6 +62,10 @@
     <ProjectReference Include="..\..\Shared\SharedEntities\SharedEntities.csproj">
       <Project>{7949699d-b90b-4bf6-bf59-f85e99eb64c2}</Project>
       <Name>SharedEntities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Shared\SharedLibraries\ModelChangeTracking\ModelChangeTracking.csproj">
+      <Project>{DA02AE6B-F680-4CB1-9EAF-67D80A902C9B}</Project>
+      <Name>ModelChangeTracking</Name>
     </ProjectReference>
     <ProjectReference Include="..\DXInfrastructure\DXInfrastructure.csproj">
       <Project>{527F5B2F-C6EB-4D3E-9DB6-C8AB7E7BB7AB}</Project>

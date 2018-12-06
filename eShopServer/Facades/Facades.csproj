@@ -61,6 +61,10 @@
       <Project>{081736AB-0ED7-4E7F-818A-96523E975723}</Project>
       <Name>EntityDTO</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Shared\SharedLibraries\ModelChangeTracking\ModelChangeTracking.csproj">
+      <Project>{da02ae6b-f680-4cb1-9eaf-67d80a902c9b}</Project>
+      <Name>ModelChangeTracking</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

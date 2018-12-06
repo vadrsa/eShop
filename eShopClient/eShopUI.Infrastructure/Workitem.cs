@@ -4,6 +4,7 @@ using DevExpress.Xpf.Bars;
 using DevExpress.Xpf.Ribbon;
 using DXInfrastructure.Imaging;
 using eShopUI.Infrastructure.Interfaces;
+using Prism.Commands;
 using Prism.Ioc;
 using System;
 using System.Collections.Generic;
@@ -35,7 +36,7 @@ namespace eShopUI.Infrastructure
             get
             {
                 if (_closeCommand == null)
-                    _closeCommand = new DelegateCommand(Close);
+                    _closeCommand = new DevExpress.Mvvm.DelegateCommand(Close);
                 return _closeCommand;
             }
         }
@@ -85,6 +86,14 @@ namespace eShopUI.Infrastructure
 
         #region Public/Protected Methods
 
+
+        protected ICommand CombineCommands(ICommand command1, ICommand command2)
+        {
+            CompositeCommand command = new CompositeCommand();
+            command.RegisterCommand(command1);
+            command.RegisterCommand(command2);
+            return command;
+        }
 
         public virtual void Run()
         {

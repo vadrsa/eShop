@@ -11,7 +11,7 @@
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <dxg:GridControl IsEnabled="{Binding IsEnabledExtended}" SelectionMode="Row" SelectedItem="{Binding CurrentItem, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" dxInf:GridProperties.ItemsList="{Binding ListItems}"  AutoGenerateColumns="None" EnableSmartColumnsGeneration="True">
+        <dxg:GridControl IsEnabled="{Binding IsEnabledExtended}" SelectionMode="Row" CurrentItem="{Binding CurrentItem, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" dxInf:GridProperties.ItemsList="{Binding ListItems}"  AutoGenerateColumns="None" EnableSmartColumnsGeneration="True">
             <dxg:GridControl.View>
                 <dxg:TableView AllowPerPixelScrolling="True" AllowEditing="False" ShowTotalSummary="True" ShowFixedTotalSummary="True"/>
             </dxg:GridControl.View>

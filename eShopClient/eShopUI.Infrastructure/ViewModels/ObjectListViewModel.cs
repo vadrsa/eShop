@@ -36,6 +36,8 @@ namespace eShopUI.Infrastructure.ViewModels
 
         private IEventAggregator _eventAggregator;
 
+        private TInfoViewModel _oldRow;
+
         private Subject<TInfoViewModel> _whenCurrentItemChanges;
 
         #endregion
@@ -63,7 +65,12 @@ namespace eShopUI.Infrastructure.ViewModels
         public ObservableCollection<TInfoViewModel> ListItems
         {
             get { return _listItems; }
-            set { SetProperty(ref _listItems, value, nameof(ListItems));  }
+            set
+            {
+                SetProperty(ref _listItems, value, nameof(ListItems));
+                if (_listItems != null && _listItems.Count > 0)
+                    CurrentItem = _listItems.First();
+            }
         }
 
         private TInfoViewModel _currentItem;
@@ -74,6 +81,7 @@ namespace eShopUI.Infrastructure.ViewModels
             {
                 bool changed = (value == null && _currentItem != null) || (value != null && !(value.Equals(_currentItem)));
                 SetProperty(ref _currentItem, value, nameof(CurrentItem));
+                UpdateCrudCommands();
                 if (changed)
                     _whenCurrentItemChanges.OnNext(value);
 
@@ -114,6 +122,11 @@ namespace eShopUI.Infrastructure.ViewModels
 
 
         #region Private/Protected Methods
+        public override void Cleanup()
+        {
+            base.Cleanup();
+            this.loadListTokenSource?.Cancel();
+        }
         private void SetCurrentItemInternal(TInfoViewModel item)
         {
             SetProperty(ref _currentItem, item, nameof(CurrentItem));
@@ -148,15 +161,43 @@ namespace eShopUI.Infrastructure.ViewModels
 
         protected override bool CanEdit()
         {
-            return ListItems != null && !IsListLoading;
+            return ListItems != null && CurrentItem != null && !IsListLoading;
         }
 
+
+        protected override void Add()
+        {
+            _oldRow = CurrentItem;
+            TInfoViewModel newItemRow = default(TInfoViewModel);
+            ExecuteUIThread(() =>
+            ListItems.Add(newItemRow));
+            SetCurrentItemInternal(ListItems.Where(i => Equals(i, default(TInfoViewModel))).FirstOrDefault());
+
+        }
 
         protected override bool CanAdd()
         {
-            return ListItems != null && !IsListLoading;
+            return ListItems != null && CurrentItem != null && !IsListLoading;
         }
-        
+
+        private void DeleteNewItemRow()
+        {
+            var found = ListItems.Where(i => Equals(i, default(TInfoViewModel))).FirstOrDefault();
+            int index = ListItems.IndexOf(found);
+            if (index != -1)
+            {
+                ExecuteUIThread(() =>
+                ListItems.RemoveAt(index));
+                Debug.Assert(ListItems.Contains(_oldRow));
+                SetCurrentItemInternal(_oldRow);
+            }
+        }
+
+        protected override void CancelEditing()
+        {
+            DeleteNewItemRow();
+        }
+
         protected virtual void HandleRowChanged(TInfoViewModel obj)
         {
             if (obj != null)
@@ -193,6 +234,7 @@ namespace eShopUI.Infrastructure.ViewModels
             try
             {
                 TInfoViewModel info = Mapper.Map<TInfoViewModel>(obj);
+                DeleteNewItemRow();
                 ExecuteUIThread(() => {
                     if (ListItems == null) ListItems = new ObservableCollection<TInfoViewModel>();
                     ListItems.Add(info);

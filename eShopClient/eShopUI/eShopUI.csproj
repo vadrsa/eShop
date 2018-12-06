@@ -162,10 +162,6 @@
       <Project>{d4c40214-db1c-42f6-acf4-9784631904d8}</Project>
       <Name>EntityDTO</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Brands\Brands.csproj">
-      <Project>{dbd3447e-c96b-41a2-b998-3d567795a878}</Project>
-      <Name>Brands</Name>
-    </ProjectReference>
     <ProjectReference Include="..\eShop.EntityViewModels\eShop.EntityViewModels.csproj">
       <Project>{079CE502-0F97-438A-A42F-77CB54F2F95C}</Project>
       <Name>eShop.EntityViewModels</Name>

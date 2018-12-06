@@ -17,6 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Shared\BusinessEntities\BusinessEntities.csproj" />
     <ProjectReference Include="..\..\Shared\EntityDTO\EntityDTO.csproj" />
+    <ProjectReference Include="..\..\Shared\SharedLibraries\ModelChangeTracking\ModelChangeTracking.csproj" />
     <ProjectReference Include="..\Facades\Facades.csproj" />
   </ItemGroup>
 

@@ -1,0 +1,15 @@
+C:\Users\Hamlet Petrosyan\Documents\davo\projects\eShop\eShopClient\ModelChangeTracking\obj\Debug\ModelChangeTracking.csprojAssemblyReference.cache
+C:\Users\Hamlet Petrosyan\Documents\davo\projects\eShop\eShopClient\ModelChangeTracking\obj\Debug\ModelChangeTracking.csproj.CoreCompileInputs.cache
+C:\Users\Hamlet Petrosyan\Documents\davo\projects\eShop\eShopClient\ModelChangeTracking\bin\Debug\ModelChangeTracking.dll
+C:\Users\Hamlet Petrosyan\Documents\davo\projects\eShop\eShopClient\ModelChangeTracking\bin\Debug\ModelChangeTracking.pdb
+C:\Users\Hamlet Petrosyan\Documents\davo\projects\eShop\eShopClient\ModelChangeTracking\bin\Debug\EmitMapper.dll
+C:\Users\Hamlet Petrosyan\Documents\davo\projects\eShop\eShopClient\ModelChangeTracking\obj\Debug\ModelChangeTracking.csproj.CopyComplete
+C:\Users\Hamlet Petrosyan\Documents\davo\projects\eShop\eShopClient\ModelChangeTracking\obj\Debug\ModelChangeTracking.dll
+C:\Users\Hamlet Petrosyan\Documents\davo\projects\eShop\eShopClient\ModelChangeTracking\obj\Debug\ModelChangeTracking.pdb
+C:\Users\Hamlet Petrosyan\Documents\davo\projects\eShop\Shared\SharedLibraries\ModelChangeTracking\bin\Debug\ModelChangeTracking.dll
+C:\Users\Hamlet Petrosyan\Documents\davo\projects\eShop\Shared\SharedLibraries\ModelChangeTracking\bin\Debug\ModelChangeTracking.pdb
+C:\Users\Hamlet Petrosyan\Documents\davo\projects\eShop\Shared\SharedLibraries\ModelChangeTracking\obj\Debug\ModelChangeTracking.csprojAssemblyReference.cache
+C:\Users\Hamlet Petrosyan\Documents\davo\projects\eShop\Shared\SharedLibraries\ModelChangeTracking\obj\Debug\ModelChangeTracking.csproj.CoreCompileInputs.cache
+C:\Users\Hamlet Petrosyan\Documents\davo\projects\eShop\Shared\SharedLibraries\ModelChangeTracking\obj\Debug\ModelChangeTracking.csproj.CopyComplete
+C:\Users\Hamlet Petrosyan\Documents\davo\projects\eShop\Shared\SharedLibraries\ModelChangeTracking\obj\Debug\ModelChangeTracking.dll
+C:\Users\Hamlet Petrosyan\Documents\davo\projects\eShop\Shared\SharedLibraries\ModelChangeTracking\obj\Debug\ModelChangeTracking.pdb

@@ -16,16 +16,26 @@ namespace DXInfrastructure.DependencyProperties
 {
     public class GridProperties
     {
-        public static readonly DependencyProperty ItemsListProperty =
-        DependencyProperty.RegisterAttached("ItemsList",
-                                            typeof(ICollection),
+        public static readonly DependencyProperty GenerateColumnsProperty =
+        DependencyProperty.RegisterAttached("GenerateColumns",
+                                            typeof(bool),
                                             typeof(GridProperties),
-                                            new UIPropertyMetadata(null, ItemsListPropertyChanged));
-        private static void ItemsListPropertyChanged(DependencyObject source, DependencyPropertyChangedEventArgs e)
+                                            new UIPropertyMetadata(false, GenerateColumnsPropertyChanged));
+        private static void GenerateColumnsPropertyChanged(DependencyObject source, DependencyPropertyChangedEventArgs e)
         {
-            GridControl grid = (GridControl)source;
-            ICollection list = (ICollection)e.NewValue;
+            if (((bool)e.NewValue))
+            {
+                GridControl grid = (GridControl)source;
+
+                grid.ItemsSourceChanged += (o, h) => { GenerateColumns(o as GridControl); };
+            }
+        }
+
+        private static void GenerateColumns(GridControl grid)
+        {
+            ICollection list = grid.ItemsSource as ICollection;
             if (list == null || list.Count == 0) return;
+            grid.Columns.Clear();
             IEnumerator enumarator = list.GetEnumerator();
             enumarator.MoveNext();
             Type listItemType = enumarator.Current.GetType();
@@ -35,7 +45,7 @@ namespace DXInfrastructure.DependencyProperties
             foreach (PropertyInfo propertyInfo in properties)
             {
                 GridColumnAttribute gridColumnAttribute = propertyInfo.GetCustomAttribute<GridColumnAttribute>();
-                if(gridColumnAttribute != null)
+                if (gridColumnAttribute != null)
                 {
                     gridColumnAttribute.Header = gridColumnAttribute.Header ?? propertyInfo.Name;
                     gridColumnAttribute.FieldName = gridColumnAttribute.FieldName ?? propertyInfo.Name;
@@ -49,7 +59,7 @@ namespace DXInfrastructure.DependencyProperties
                 return o.Order.CompareTo(t.Order);
 
             });
-            foreach(GridColumnAttribute columnAttribute in columns)
+            foreach (GridColumnAttribute columnAttribute in columns)
             {
                 GridColumn column = new GridColumn();
                 column.Header = columnAttribute.Header;
@@ -57,16 +67,15 @@ namespace DXInfrastructure.DependencyProperties
                 column.Name = columnAttribute.FieldName;
                 grid.Columns.Add(column);
             }
-            grid.ItemsSource = list;
-            
+
         }
-        public static void SetItemsList(DependencyObject element, ICollection value)
+        public static void SetGenerateColumns(DependencyObject element, bool value)
         {
-            element.SetValue(ItemsListProperty, value);
+            element.SetValue(GenerateColumnsProperty, value);
         }
-        public static ICollection GetItemsList(DependencyObject element)
+        public static bool GetGenerateColumns(DependencyObject element)
         {
-            return (ICollection)element.GetValue(ItemsListProperty);
+            return (bool)element.GetValue(GenerateColumnsProperty);
         }
     }
 }

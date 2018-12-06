@@ -74,12 +74,17 @@ namespace Repositories.Base
             return table;
         }
 
-        protected long BulkInsert(List<T> list)
+        public long InsertRange(List<T> list)
         {
             using (DBContext context = new DBContext())
             {
                 return context.BulkCopy(list).RowsCopied;
             }
+        }
+
+        public Task<long> InsertRangeAsync(List<T> list, CancellationToken token = new CancellationToken())
+        {
+            return Task.Run(() => InsertRange(list));
         }
 
         protected IEnumerable<T> ExecuteSelect(Func<ITable<T>, IEnumerable<T>> func, DBContext context)

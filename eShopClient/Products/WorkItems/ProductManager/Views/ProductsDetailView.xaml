@@ -1,0 +1,85 @@
+﻿<UserControl xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"  xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:prism="http://prismlibrary.com/"
+            xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:inf="clr-namespace:eShopUI.Infrastructure;assembly=eShopUI.Infrastructure"
+             xmlns:dxInf="clr-namespace:DXInfrastructure.DependencyProperties;assembly=DXInfrastructure"
+             xmlns:enums="clr-namespace:SharedEntities.Enums;assembly=SharedEntities"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"  
+             xmlns:Products="clr-namespace:eShop.EntityViewModels.Products;assembly=eShop.EntityViewModels"  
+             xmlns:ViewModels="clr-namespace:Modules.Products.WorkItems.ProductManager.ViewModels"
+             xmlns:Attach="clr-namespace:DXInfrastructure.DependencyProperties;assembly=DXInfrastructure"
+             xmlns:vc ="clr-namespace:eShopUI.Infrastructure.ValueConverters;assembly=eShopUI.Infrastructure"
+             x:Class="Modules.Products.WorkItems.ProductManager.Views.ProductsDetailView"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d"
+             Width="{Binding ViewWidth}"
+             d:DesignHeight="700 " d:DesignWidth="400">
+    <UserControl.Resources>
+        <vc:ObjectVisibilityConverter x:Key="ObjectVisibilityConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <dxlc:DataLayoutControl Visibility="{Binding Object, Converter={StaticResource ObjectVisibilityConverter}}" inf:ReadOnlyPanel.IsReadOnly="{Binding IsReadOnly, UpdateSourceTrigger=PropertyChanged}"
+                                CurrentItem="{Binding Object}" dxe:ValidationService.IsValidationContainer="True" AutoGenerateItems="False" Width="auto" >
+
+            <dxlc:DataLayoutItem Label="Image">
+                <dxe:ImageEdit MaxHeight="200" EditValue="{Binding DataContext.ObjectImage, ValidatesOnDataErrors=True, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType=Grid}}" />
+            </dxlc:DataLayoutItem>
+            <dxlc:DataLayoutItem Label="Name">
+                <dxe:TextEdit Text="{Binding Name, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
+            </dxlc:DataLayoutItem>
+            <dxlc:DataLayoutItem Label="Description">
+                <dxe:TextEdit Text="{Binding Description, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
+
+            </dxlc:DataLayoutItem>
+
+            <dxlc:DataLayoutItem Label="Price">
+                <dxe:TextEdit Text="{Binding Price, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
+
+            </dxlc:DataLayoutItem>
+            <dxlc:DataLayoutItem Label="Brand">
+                <dxe:ComboBoxEdit ItemsSource="{Binding DataContext.Brands, RelativeSource={RelativeSource AncestorType=Grid}}"
+                              ValueMember="ID"
+                              DisplayMember="Name" ImmediatePopup="True" 
+                               EditValue="{Binding BrandID, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
+            </dxlc:DataLayoutItem>
+            <dxlc:DataLayoutItem Label="Categories">
+                <dxg:LookUpEdit AutoPopulateColumns="False" ItemsSource="{Binding DataContext.Categories, RelativeSource={RelativeSource AncestorType=Grid}}" DisplayMember="Name" ImmediatePopup="True" 
+                            ValueMember="ID" EditValue="{Binding CategoryID, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}">
+                    <dxg:LookUpEdit.PopupContentTemplate>
+                        <ControlTemplate>
+                            <dxg:GridControl dxInf:GridProperties.GenerateColumns="True" x:Name="PART_GridControl" AutoGenerateColumns="None" EnableSmartColumnsGeneration="False">
+                                <dxg:GridControl.View>
+                                    <dxg:TreeListView AutoWidth="True" x:Name="treeListView1" TreeDerivationMode="Selfreference" KeyFieldName="ID" ParentFieldName="ParentID" />
+                                </dxg:GridControl.View>
+                            </dxg:GridControl>
+                        </ControlTemplate>
+                    </dxg:LookUpEdit.PopupContentTemplate>
+                </dxg:LookUpEdit>
+            </dxlc:DataLayoutItem>
+            <dxlc:DataLayoutItem Label="ProductCode">
+                <dxe:TextEdit Text="{Binding ProductCode, Mode=TwoWay, ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}"/>
+
+            </dxlc:DataLayoutItem>
+
+            <dxlc:DataLayoutItem Label="Availability">
+                <dxe:ComboBoxEdit ItemsSource="{dxe:EnumItemsSource EnumType={x:Type enums:Availability}}" 
+                              EditValue="{Binding Availability, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </dxlc:DataLayoutItem>
+
+        </dxlc:DataLayoutControl>
+        <dx:WaitIndicator DeferedVisibility="{Binding IsObjectLoading}">
+            <dx:WaitIndicator.ContentTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="Please Wait" FontSize="20"/>
+                        <TextBlock Text="{Binding}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </dx:WaitIndicator.ContentTemplate>
+        </dx:WaitIndicator>
+    </Grid>
+</UserControl>

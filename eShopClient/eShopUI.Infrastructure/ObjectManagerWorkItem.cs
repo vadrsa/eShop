@@ -14,6 +14,7 @@ using DXInfrastructure.Imaging;
 using System.Diagnostics;
 using System.Windows.Input;
 using Prism.Commands;
+using System.ComponentModel;
 
 namespace eShopUI.Infrastructure
 {
@@ -21,7 +22,7 @@ namespace eShopUI.Infrastructure
         where TListView : FrameworkElement, new()
         where TDetailsView : FrameworkElement, new()
         where TInfoViewModel : IIdEntityViewModel, new()
-        where TDetailViewModel : IIdEntityViewModel, new()
+        where TDetailViewModel : IIdEntityViewModel, INotifyPropertyChanged, new()
     {
         #region Private Fields
 
@@ -66,13 +67,6 @@ namespace eShopUI.Infrastructure
             _listViewModel.Cleanup();
         }
 
-        private ICommand CombineCommands(ICommand command1, ICommand command2)
-        {
-            CompositeCommand command = new CompositeCommand();
-            command.RegisterCommand(command1);
-            command.RegisterCommand(command2);
-            return command;
-        }
 
         protected override void AddAdditionalCommandGroups()
         {

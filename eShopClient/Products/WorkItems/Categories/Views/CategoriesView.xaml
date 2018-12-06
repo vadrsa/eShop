@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="Modules.Products.WorkItems.Categories.Views.CategoriesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:conv="clr-namespace:eShopUI.Infrastructure.ValueConverters;assembly=eShopUI.Infrastructure"
+            xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" 
+    xmlns:dxInf="clr-namespace:DXInfrastructure.DependencyProperties;assembly=DXInfrastructure"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <conv:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <dxg:GridControl IsEnabled="{Binding IsEnabledExtended}" SelectionMode="Row" CurrentItem="{Binding CurrentItem, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" dxInf:GridProperties.GenerateColumns="True"  ItemsSource="{Binding ListItems}"  AutoGenerateColumns="None" EnableSmartColumnsGeneration="True">
+            <dxg:GridControl.View>
+
+                <dxg:TreeListView NodeChanged="TreeListView_NodeChanged" FocusedRow="{Binding FocusedRow, UpdateSourceTrigger=PropertyChanged}"  BestFitMode="Smart" AllowPerPixelScrolling="True" EnableImmediatePosting="True"  AutoWidth="True" x:Name="treeListView1" TreeDerivationMode="Selfreference" KeyFieldName="ID" ParentFieldName="ParentID" AllowEditing="{Binding IsReadOnly, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource InverseBooleanConverter}}" ShowTotalSummary="True" ShowFixedTotalSummary="True">
+                    <dxmvvm:Interaction.Behaviors>
+                        <dxmvvm:KeyToCommand KeyGesture="Delete" Command="{Binding DeleteRowCommand}"/>
+                        <dxmvvm:KeyToCommand KeyGesture="CTRL+SHIFT+A" Command="{Binding AddNewRowCommand}"/>
+                    </dxmvvm:Interaction.Behaviors>
+                    <dxg:TreeListView.RowCellMenuCustomizations>
+                        <dxb:BarButtonItem Name="deleteRowItem" Content="Delete" IsEnabled="{Binding View.DataContext.IsReadOnly, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource InverseBooleanConverter}}"
+                            Command="{Binding View.DataContext.DeleteRowCommand}" />
+                        <dxb:BarButtonItem Name="addRowItem"  Content="Add" IsEnabled="{Binding View.DataContext.IsReadOnly, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource InverseBooleanConverter}}"
+                            Command="{Binding View.DataContext.AddNewRowCommand}" />
+                    </dxg:TreeListView.RowCellMenuCustomizations>
+                </dxg:TreeListView>
+            </dxg:GridControl.View>
+            <dxg:GridControl.TotalSummary>
+                <dxg:GridSummaryItem SummaryType="Count" Alignment="Right" DisplayFormat="Total Items: {0}"/>
+            </dxg:GridControl.TotalSummary>
+        </dxg:GridControl>
+        <dx:WaitIndicator DeferedVisibility="{Binding IsListLoading}" Content="Loading...">
+            <dx:WaitIndicator.ContentTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="Please Wait" FontSize="20"/>
+                        <TextBlock Text="{Binding}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </dx:WaitIndicator.ContentTemplate>
+        </dx:WaitIndicator>
+    </Grid>
+</UserControl>

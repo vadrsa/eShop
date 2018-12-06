@@ -82,7 +82,7 @@ namespace eShopUI.Infrastructure.Api
         }
     }
 
-    public class RestConsumingService<T> : RestConsumingServiceBase, IRestDetailConsumingService<T>, IRestInfoConsumingService<T>
+    public class RestConsumingService<T> : RestConsumingServiceBase, IRestConsumingService<T>
     {
         private RestInfoConsumingService<T> _infoService;
         private RestDetailConsumingService<T> _detailService;

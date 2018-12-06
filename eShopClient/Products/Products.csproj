@@ -118,13 +118,27 @@
   <ItemGroup>
     <Compile Include="Constants\UIConstants.cs" />
     <Compile Include="Interfaces\IProductService.cs" />
-    <Compile Include="ProductManager\ProductManagerWorkItem.cs" />
-    <Compile Include="ProductManager\ViewModels\ProductsDetailViewModel.cs" />
-    <Compile Include="ProductManager\ViewModels\ProductsListViewModel.cs" />
-    <Compile Include="ProductManager\Views\ProductsDetailView.xaml.cs">
+    <Compile Include="WorkItems\Categories\CategoriesWorkItem.cs" />
+    <Compile Include="WorkItems\Categories\ViewModels\CategoriesViewModel.cs" />
+    <Compile Include="WorkItems\Categories\Views\CategoriesView.xaml.cs">
+      <DependentUpon>CategoriesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WorkItems\BrandManager\BrandManagerWorkItem.cs" />
+    <Compile Include="WorkItems\BrandManager\ViewModels\BrandsDetailViewModel.cs" />
+    <Compile Include="WorkItems\BrandManager\ViewModels\BrandsListViewModel.cs" />
+    <Compile Include="WorkItems\BrandManager\Views\BrandsDetailView.xaml.cs">
+      <DependentUpon>BrandsDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WorkItems\BrandManager\Views\BrandsListView.xaml.cs">
+      <DependentUpon>BrandsListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WorkItems\ProductManager\ProductManagerWorkItem.cs" />
+    <Compile Include="WorkItems\ProductManager\ViewModels\ProductsDetailViewModel.cs" />
+    <Compile Include="WorkItems\ProductManager\ViewModels\ProductsListViewModel.cs" />
+    <Compile Include="WorkItems\ProductManager\Views\ProductsDetailView.xaml.cs">
       <DependentUpon>ProductsDetailView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ProductManager\Views\ProductsListView.xaml.cs">
+    <Compile Include="WorkItems\ProductManager\Views\ProductsListView.xaml.cs">
       <DependentUpon>ProductsListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -141,6 +155,10 @@
     <ProjectReference Include="..\..\Shared\SharedEntities\SharedEntities.csproj">
       <Project>{7949699d-b90b-4bf6-bf59-f85e99eb64c2}</Project>
       <Name>SharedEntities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Shared\SharedLibraries\ModelChangeTracking\ModelChangeTracking.csproj">
+      <Project>{DA02AE6B-F680-4CB1-9EAF-67D80A902C9B}</Project>
+      <Name>ModelChangeTracking</Name>
     </ProjectReference>
     <ProjectReference Include="..\DXInfrastructure\DXInfrastructure.csproj">
       <Project>{527f5b2f-c6eb-4d3e-9db6-c8ab7e7bb7ab}</Project>
@@ -160,11 +178,23 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="ProductManager\Views\ProductsDetailView.xaml">
+    <Page Include="WorkItems\Categories\Views\CategoriesView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ProductManager\Views\ProductsListView.xaml">
+    <Page Include="WorkItems\BrandManager\Views\BrandsDetailView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WorkItems\BrandManager\Views\BrandsListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WorkItems\ProductManager\Views\ProductsDetailView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WorkItems\ProductManager\Views\ProductsListView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -9,5 +9,8 @@ namespace Modules.Products.Constants
     public static class UIConstants
     {
         public static string ProductManagerWorkItemName = "Product Manager";
+        public static string BarndManagerWorkItemName = "Brand Manager";
+        public static string CategoriesWorkItemName = "Categories";
+
     }
 }

@@ -2,10 +2,10 @@
 using DevExpress.Mvvm;
 using DevExpress.Xpf.Core;
 using eShop.EntityViewModels.Interfaces;
-using eShopUI.Infrastructure.EditableObject;
 using eShopUI.Infrastructure.Enums;
 using eShopUI.Infrastructure.Events;
 using eShopUI.Infrastructure.Interfaces;
+using ModelChangeTracking;
 using Prism.Events;
 using Prism.Ioc;
 using System;
@@ -23,7 +23,7 @@ using System.Windows.Input;
 namespace eShopUI.Infrastructure.ViewModels
 {
     public class ObjectDetailViewModel<T, TDetailViewModel> : CrudManagerViewModel
-        where TDetailViewModel : IIdEntityViewModel, new()
+        where TDetailViewModel : IIdEntityViewModel, INotifyPropertyChanged, new()
     {
 
         #region Private Fields
@@ -65,13 +65,7 @@ namespace eShopUI.Infrastructure.ViewModels
 
 
         #endregion
-
-#if DESIGN
-        public ObjectDetailViewModel()
-        {
-            IsObjectLoading = false;
-        }
-#endif
+        
 
         public ObjectDetailViewModel(IContainerExtension container)
         {
@@ -118,7 +112,7 @@ namespace eShopUI.Infrastructure.ViewModels
         private bool _IsReadOnly;
         public bool IsReadOnly
         {
-            get { return EditMode == EditMode.ReadOnly; }
+            get { return EditMode == EditMode.ReadOnly || IsObjectLoading; }
         }
 
         private bool _IsObjectLoading;
@@ -128,6 +122,8 @@ namespace eShopUI.Infrastructure.ViewModels
             get { return _IsObjectLoading; }
             set { SetProperty(ref _IsObjectLoading, value, nameof(IsObjectLoading));
                 UpdateCrudCommands();
+                RaisePropertiesChanged(nameof(IsReadOnly));
+
             }
         }
 
@@ -135,7 +131,12 @@ namespace eShopUI.Infrastructure.ViewModels
         #endregion
 
         #region Public/Protected Methods
-        
+
+        public override void Cleanup()
+        {
+            base.Cleanup();
+            this.getObjectTokenSource?.Cancel();
+        }
 
         protected virtual bool IsValid()
         {

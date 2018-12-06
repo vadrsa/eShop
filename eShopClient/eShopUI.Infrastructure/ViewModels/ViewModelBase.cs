@@ -41,10 +41,11 @@ namespace eShopUI.Infrastructure.ViewModels
         {
             if (!Application.Current.Dispatcher.CheckAccess())
             {
-                Application.Current.Dispatcher.Invoke(() =>
+                Application.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(() =>
                 {
                     action();
-                });
+                }));
+                
             }
             else action();
         }
@@ -52,6 +53,11 @@ namespace eShopUI.Infrastructure.ViewModels
         public virtual void Cleanup()
         {
             _tokens.ForEach(t => t.Dispose());
+        }
+
+        public void Validate()
+        {
+            this.RaisePropertiesChanged("");
         }
     }
 }

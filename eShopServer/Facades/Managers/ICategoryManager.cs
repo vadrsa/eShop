@@ -1,4 +1,5 @@
 ﻿using EntityDTO.Products;
+using ModelChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +11,9 @@ namespace Facades.Managers
 {
     public interface ICategoryManager
     {
-        List<CategoryDTO> GetAll();
         Task<List<CategoryDTO>> GetAllAsync(CancellationToken token = new CancellationToken());
-
-        List<CategoryTreeItemDTO> GetTree();
+        
         Task<List<CategoryTreeItemDTO>> GetTreeAsync(CancellationToken token = new CancellationToken());
+        Task<bool> SaveEditableListAsync(ITrackableCollection<CategoryDTO> trackableCollection, CancellationToken token = new CancellationToken());
     }
 }

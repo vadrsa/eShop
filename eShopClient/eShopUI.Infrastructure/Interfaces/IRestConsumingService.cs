@@ -7,6 +7,11 @@ using System.Threading.Tasks;
 
 namespace eShopUI.Infrastructure.Interfaces
 {
+
+    public interface IRestConsumingService<T> : IRestInfoConsumingService<T>, IRestDetailConsumingService<T>
+    {
+    }
+
     public interface IRestInfoConsumingService<TInfo>
     {
         Task<List<TInfo>> Get(CancellationToken token = new CancellationToken());

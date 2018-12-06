@@ -115,9 +115,6 @@
     <Compile Include="Constants\MenuGroups.cs" />
     <Compile Include="Constants\UIConstants.cs" />
     <Compile Include="ContentWorkItem.cs" />
-    <Compile Include="EditableObject\EditableAdapter.cs" />
-    <Compile Include="EditableObject\InternalPropertyDescriptorFactory.cs" />
-    <Compile Include="EditableObject\Memento.cs" />
     <Compile Include="Enums\EditMode.cs" />
     <Compile Include="Events\AuthenticatedEvent.cs" />
     <Compile Include="Events\ObjectDetailsItemAddedEvent.cs" />
@@ -144,10 +141,12 @@
     <Compile Include="ReadOnlyPanel.cs" />
     <Compile Include="Services\CurrentContextService.cs" />
     <Compile Include="Services\ShellExtensionService.cs" />
+    <Compile Include="ValueConverters\InverseBooleanConverter.cs" />
     <Compile Include="ValueConverters\ObjectWidthConverter.cs" />
     <Compile Include="ValueConverters\ObjectVisibilityConverter.cs" />
     <Compile Include="ViewModels\CrudManagerViewModel.cs" />
     <Compile Include="ViewModels\ObjectDetailViewModel.cs" />
+    <Compile Include="ViewModels\ContentViewModel.cs" />
     <Compile Include="ViewModels\ObjectListViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Workitem.cs" />
@@ -162,6 +161,10 @@
     <ProjectReference Include="..\..\Shared\EntityDTO\EntityDTO.csproj">
       <Project>{d4c40214-db1c-42f6-acf4-9784631904d8}</Project>
       <Name>EntityDTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Shared\SharedLibraries\ModelChangeTracking\ModelChangeTracking.csproj">
+      <Project>{DA02AE6B-F680-4CB1-9EAF-67D80A902C9B}</Project>
+      <Name>ModelChangeTracking</Name>
     </ProjectReference>
     <ProjectReference Include="..\DXInfrastructure\DXInfrastructure.csproj">
       <Project>{527F5B2F-C6EB-4D3E-9DB6-C8AB7E7BB7AB}</Project>

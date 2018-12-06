@@ -1,6 +1,7 @@
 ﻿using EntityDTO.Products;
 using eShopUI.Infrastructure.Api;
 using Flurl.Http;
+using ModelChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,23 @@ namespace Modules.Products.Services
             var response = (await (ControllerPath + "tree").GetJsonAsync(token)).ConfigureAwait(false);
             return response;
         }
+
+        public async Task<bool> SaveTrackableList(ITrackableCollection<CategoryDTO> collection, CancellationToken token = new CancellationToken())
+        {
+            try
+            {
+                var response = (await (ControllerPath + "editable").PostJsonAsync(collection, token).ReceiveJson<bool>());
+                return response;
+
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+        }
+
+
 
     }
 }
